@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:db.sqlite
+    driver-class-name: org.sqlite.JDBC
+  servlet:
+    multipart:
+      max-request-size: 500MB # request 요청 제한
+      max-file-size: 500MB # 파일 업로드 크기 제한
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    defer-datasource-initialization: true
