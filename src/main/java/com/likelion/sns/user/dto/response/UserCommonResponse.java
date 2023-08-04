@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserJoinResponse {
+public class UserCommonResponse {
     private String message;
 }
