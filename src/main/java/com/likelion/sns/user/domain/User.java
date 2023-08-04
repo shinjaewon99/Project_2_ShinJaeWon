@@ -1,5 +1,7 @@
 package com.likelion.sns.user.domain;
 
+import com.likelion.sns.article.feed.domain.Feed;
+import com.likelion.sns.article.likeArticle.domain.LikeArticle;
 import com.likelion.sns.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -8,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +23,7 @@ import java.util.List;
 public class User extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "user_name", nullable = false)
@@ -43,13 +46,26 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
 
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<Feed> feeds = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<LikeArticle> userLikeArticles = new ArrayList<>();
+
+    public void addFeed(Feed feed) {
+        feeds.add(feed);
+        feed.setUser(this);
+    }
+
+    public void uploadImg(String imgUrl) {
+        this.profileImg = imgUrl;
+    }
 
     // 사용자에게 부여된 권한을 지정
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(userRole.name()));
     }
-
 
     @Override
     public String getUsername() {
