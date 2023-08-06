@@ -1,4 +1,4 @@
-package com.likelion.sns.user.exception;
+package com.likelion.sns.global.exception;
 
 public class NotExistUserException extends RuntimeException {
 
