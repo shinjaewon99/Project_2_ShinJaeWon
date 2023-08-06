@@ -52,12 +52,22 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<LikeArticle> userLikeArticles = new ArrayList<>();
 
-    public void addFeed(Feed feed) {
+    public User(final String username, final String password, final String email,
+                final String phone, final UserRole role) {
+
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.userRole = role;
+    }
+
+    public void addFeed(final Feed feed) {
         feeds.add(feed);
         feed.setUser(this);
     }
 
-    public void uploadImg(String imgUrl) {
+    public void uploadImg(final String imgUrl) {
         this.profileImg = imgUrl;
     }
 
