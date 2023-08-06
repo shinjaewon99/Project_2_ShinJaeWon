@@ -8,14 +8,14 @@ import com.likelion.sns.user.domain.UserRole;
 import com.likelion.sns.user.dto.request.UserJoinRequest;
 import com.likelion.sns.user.dto.request.logIn.UserLoginRequest;
 import com.likelion.sns.user.dto.response.UserCommonResponse;
-import com.likelion.sns.user.dto.response.UserReadResponse;
+import com.likelion.sns.user.exception.NotExistUserException;
+import com.likelion.sns.user.exception.NotInputPasswordException;
+import com.likelion.sns.user.exception.NotInputUserIdException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,13 +37,12 @@ public class UserService {
 
     // 회원가입 메소드
     public UserCommonResponse userJoin(final UserJoinRequest joinRequest) {
-        User user = User.builder()
-                .username(joinRequest.getUserId())
-                .password(passwordEncoder.encode(joinRequest.getPassword()))
-                .email(joinRequest.getEmail())
-                .phone(joinRequest.getPhone())
-                .userRole(UserRole.USER)
-                .build();
+        validateUsername(joinRequest.getUserId()); // 아이디 미입력 검증
+        validatePassword(joinRequest.getPassword()); // 비밀번호 미입력 검증
+
+        User user = new User(joinRequest.getUserId(), passwordEncoder.encode(joinRequest.getPassword()),
+                joinRequest.getEmail(), joinRequest.getPhone(), UserRole.USER);
+
         userRepository.save(user);
 
         String jwt = jwtProviderService.generateToken(user);
@@ -58,6 +57,10 @@ public class UserService {
 
     // 로그인 메소드
     public AuthenticationResponse userLogin(final UserLoginRequest loginRequest) {
+        validateUsername(loginRequest.getUserId()); // 아이디 미입력 검증
+        validatePassword(loginRequest.getPassword()); // 비밀번호 미입력 검증
+        validateExistUsername(loginRequest.getUserId()); // 등록된 회원인지 검증
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUserId());
 
         authenticationManager.authenticate(
@@ -77,13 +80,10 @@ public class UserService {
     }
 
     // 이미지 등록 메소드
-    public UserCommonResponse postImg(MultipartFile image, String userId) {
+    public UserCommonResponse postImg(final Long userId, final MultipartFile image) {
+        User findUser = validateExistUserId(userId); // 등록된 회원이 있는지 검증
 
-
-        User findUserId = userRepository
-                .findByUsername(userId).orElseThrow(() -> new UsernameNotFoundException("로그인한 회원이 아닙니다."));
-
-        String imageLocation = String.format("image/%d/", findUserId.getId());
+        String imageLocation = String.format("profileImage/%d/", findUser.getId());
         String imageName = image.getOriginalFilename();
         String imagePath = imageLocation + imageName;
 
@@ -99,8 +99,8 @@ public class UserService {
             throw new IllegalArgumentException();
         }
 
-        findUserId.uploadImg(imagePath);
-        userRepository.save(findUserId);
+        findUser.uploadImg(imagePath);
+        userRepository.save(findUser);
 
         UserCommonResponse response = new UserCommonResponse();
         response.setMessage("프로필 등록이 완료되었습니다.");
@@ -108,11 +108,24 @@ public class UserService {
         return response;
     }
 
-    public UserReadResponse readUserOne(Authentication authentication) {
-        User findUserId = userRepository
-                .findByUsername(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("로그인한 회원이 아닙니다."));
+    private void validateUsername(final String username) {
+        if (username == null) {
+            throw new NotInputUserIdException("아이디를 입력해 주세요.");
+        }
+    }
 
-        return new UserReadResponse(findUserId.getUsername(),
-                findUserId.getProfileImg(), findUserId.getEmail(), findUserId.getPhone());
+    private void validatePassword(final String password) {
+        if (password == null) {
+            throw new NotInputPasswordException("비밀번호를 입력해 주세요.");
+        }
+    }
+
+    private void validateExistUsername(final String username) {
+        userRepository.findByUsername(username).orElseThrow(() -> new NotExistUserException("등록된 회원이 아닙니다."));
+    }
+
+    private User validateExistUserId(final Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotExistUserException("등록된 회원이 없습니다."));
     }
 }
