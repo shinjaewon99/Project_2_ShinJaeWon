@@ -63,6 +63,22 @@ public class CommentService {
         return commentCommonResponse;
     }
 
+    // 댓글 논리 삭제 메소드
+    public CommentCommonResponse softDeleteComment(final Long userId,
+                                                   final Long feedId,
+                                                   final Long commentId) {
+        validateExistUser(userId);
+        validateExistFeed(feedId);
+        validateExistComment(commentId);
+
+        commentRepository.deleteById(feedId);
+
+        CommentCommonResponse response = new CommentCommonResponse();
+        response.setMessage("댓글 삭제가 완료되었습니다.");
+
+        return response;
+    }
+
 
     private User validateExistUser(final Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotExistUserException("등록된 회원이 없습니다."));
@@ -73,7 +89,7 @@ public class CommentService {
     }
 
     private Comment validateExistComment(final Long commentId) {
-        return commentRepository.findById(commentId).orElseThrow(() -> new NotExistUserException("등록된 피드가 없습니다."));
+        return commentRepository.findById(commentId).orElseThrow(() -> new NotExistUserException("등록된 댓글이 없습니다."));
     }
 
     private void validateWriter(String writer) {
