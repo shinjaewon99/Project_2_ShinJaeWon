@@ -24,5 +24,12 @@ public class LikeArticle {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feed_id")
-    private Feed feedId;
+    private Feed likeFeedId;
+
+    public LikeArticle(final User user, final Feed feed) {
+        this.userId = user;
+        this.likeFeedId = feed;
+        user.getUserLikeArticles().add(this);
+        feed.getFeedIdLikeArticles().add(this);
+    }
 }
