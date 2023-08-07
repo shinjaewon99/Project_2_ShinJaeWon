@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "like_article")
 @Entity
@@ -25,6 +26,10 @@ public class LikeArticle {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feed_id")
     private Feed likeFeedId;
+
+    @Setter
+    @Column(name = "like_count")
+    private Integer likeCount;
 
     public LikeArticle(final User user, final Feed feed) {
         this.userId = user;
