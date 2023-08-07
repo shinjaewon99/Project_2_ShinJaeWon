@@ -23,6 +23,7 @@ public class LikeArticleService {
     private final FeedRepository feedRepository;
     private final LikeArticleRepository likeArticleRepository;
     private static long compare = 0; // userId 저장 변수
+    private static Integer likeCount = 0; // 좋아요 갯수 저장 변수
 
     public LikeArticleCommonResponse likeFeed(final Long userId, final Long feedId) {
         User findUser = validateExistUser(userId);
@@ -38,10 +39,12 @@ public class LikeArticleService {
         if (likeArticle.getUserId().getId() == compare) {
             likeArticleRepository.delete(likeArticle);
             likeArticleCommonResponse.setMessage("기존의 좋아요가 삭제되었습니다.");
-            compare = 0; // 초기화
+            likeArticle.setLikeCount(--likeCount); // 전위 연산자를 통한 좋아요 갯수 감소
+            compare = 0; // userId 초기화
         } else {
             likeArticleRepository.save(likeArticle);
             likeArticleCommonResponse.setMessage("좋아요가 등록되었습니다.");
+            likeArticle.setLikeCount(++likeCount); // 전위 연산자를 통한 좋아요 갯수 증가
             compare = likeArticle.getUserId().getId(); // compare에 userId 값 할당
         }
 
