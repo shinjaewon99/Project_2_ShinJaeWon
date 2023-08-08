@@ -2,6 +2,8 @@ package com.likelion.sns.user.service;
 
 import com.likelion.sns.auth.dto.response.AuthenticationResponse;
 import com.likelion.sns.auth.service.JwtProviderService;
+import com.likelion.sns.global.exception.NotExistUserNameException;
+import com.likelion.sns.global.exception.NotInputException;
 import com.likelion.sns.user.domain.User;
 import com.likelion.sns.user.domain.UserRepository;
 import com.likelion.sns.user.domain.UserRole;
@@ -9,8 +11,6 @@ import com.likelion.sns.user.dto.request.UserJoinRequest;
 import com.likelion.sns.user.dto.request.logIn.UserLoginRequest;
 import com.likelion.sns.user.dto.response.UserCommonResponse;
 import com.likelion.sns.user.exception.NotExistUserException;
-import com.likelion.sns.user.exception.NotInputPasswordException;
-import com.likelion.sns.user.exception.NotInputUserIdException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -80,10 +80,10 @@ public class UserService {
     }
 
     // 이미지 등록 메소드
-    public UserCommonResponse postImg(final Long userId, final MultipartFile image) {
+    public UserCommonResponse postImg(final Long userId, final MultipartFile image) throws IOException {
         User findUser = validateExistUserId(userId); // 등록된 회원이 있는지 검증
 
-        String imageLocation = String.format("profileImage/%d/", findUser.getId());
+        String imageLocation = String.format("image_profile/%d/", findUser.getId());
         String imageName = image.getOriginalFilename();
         String imagePath = imageLocation + imageName;
 
@@ -110,18 +110,19 @@ public class UserService {
 
     private void validateUsername(final String username) {
         if (username == null) {
-            throw new NotInputUserIdException("아이디를 입력해 주세요.");
+            throw new NotInputException("아이디를 입력해 주세요.");
         }
     }
 
     private void validatePassword(final String password) {
         if (password == null) {
-            throw new NotInputPasswordException("비밀번호를 입력해 주세요.");
+            throw new NotInputException("비밀번호를 입력해 주세요.");
         }
     }
 
     private void validateExistUsername(final String username) {
-        userRepository.findByUsername(username).orElseThrow(() -> new NotExistUserException("등록된 회원이 아닙니다."));
+        userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotExistUserNameException("등록된 회원이 아닙니다."));
     }
 
     private User validateExistUserId(final Long userId) {
