@@ -1,5 +1,6 @@
 package com.likelion.sns.user.domain;
 
+import com.likelion.sns.article.comment.domain.Comment;
 import com.likelion.sns.article.feed.domain.Feed;
 import com.likelion.sns.article.likeArticle.domain.LikeArticle;
 import com.likelion.sns.global.entity.BaseEntity;
@@ -51,6 +52,10 @@ public class User extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<LikeArticle> userLikeArticles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
 
     public User(final String username, final String password, final String email,
                 final String phone, final UserRole role) {
