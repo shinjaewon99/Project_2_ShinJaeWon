@@ -1,0 +1,644 @@
+{
+	"info": {
+		"_postman_id": "a83c3a4f-0f82-45a0-8b4a-543f0cb51ab4",
+		"name": "project_2_mission_2day (피드 단독 조회)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22851675"
+	},
+	"item": [
+		{
+			"name": "정상 피드 단독 조회 (피드 제목, 내용만 포함)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDE0Nzg3LCJleHAiOjE2OTE0MTYyMjd9.HxzkCbSbx7plp2iHHYaZWnPt7yqYa5ieQcW_4gJZQkk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "reseponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/1/feed/1/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1",
+								"feed",
+								"1",
+								"readOne"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:23:57 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"여기 맛집\",\n    \"content\": \"왕십리 맛집이네요\",\n    \"imgUrls\": \" \",\n    \"comments\": [],\n    \"likeCount\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "정상 피드 단독 조회 (피드 제목, 내용, 피드에 등록된 이미지 경로만 포함)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/1/feed/1/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1",
+								"feed",
+								"1",
+								"readOne"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:27:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"여기 맛집\",\n    \"content\": \"왕십리 맛집이네요\",\n    \"imgUrls\": \"feed_images/1/1.PNG\",\n    \"comments\": [],\n    \"likeCount\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "정상 피드 단독 조회 (피드 제목, 내용, 피드에 등록된 이미지 경로, 피드에 등록된 댓글 목록만 포함)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/1/feed/1/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1",
+								"feed",
+								"1",
+								"readOne"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:28:30 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"여기 맛집\",\n    \"content\": \"왕십리 맛집이네요\",\n    \"imgUrls\": \"feed_images/1/1.PNG\",\n    \"comments\": [\n        \"맛집 탐험가\",\n        \"왕십리 어디쪽인가요?\"\n    ],\n    \"likeCount\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "정상 피드 단독 조회 (필드 모두 조회)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/1/feed/1/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1",
+								"feed",
+								"1",
+								"readOne"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:29:42 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"여기 맛집\",\n    \"content\": \"왕십리 맛집이네요\",\n    \"imgUrls\": \"feed_images/1/1.PNG\",\n    \"comments\": [\n        \"맛집 탐험가\",\n        \"왕십리 어디쪽인가요?\"\n    ],\n    \"likeCount\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "비정상 피드 단독 조회 (등록된 회원 X)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/3/feed/1/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"3",
+						"feed",
+						"1",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/3/feed/1/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"3",
+								"feed",
+								"1",
+								"readOne"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:35:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"exceptionMessage\": \"등록된 회원이 없습니다.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "비정상 피드 단독 조회 (등록된 피드 X)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/2/readOne",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"2",
+						"readOne"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user/1/feed/2/readOne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1",
+								"feed",
+								"2",
+								"readOne"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Aug 2023 13:36:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"exceptionMessage\": \"등록된 피드가 없습니다.\"\n}"
+				}
+			]
+		}
+	]
+}
