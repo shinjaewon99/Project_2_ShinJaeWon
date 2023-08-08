@@ -10,6 +10,7 @@ import com.likelion.sns.user.domain.UserRole;
 import com.likelion.sns.user.dto.request.UserJoinRequest;
 import com.likelion.sns.user.dto.request.logIn.UserLoginRequest;
 import com.likelion.sns.user.dto.response.UserCommonResponse;
+import com.likelion.sns.user.dto.response.UserReadResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -107,6 +108,13 @@ public class UserService {
         return response;
     }
 
+    // 사용자 정보 조회 메소드
+    public UserReadResponse readUser(final Long userId) {
+        User findUser = validateExistUserId(userId);
+
+        return new UserReadResponse(findUser.getUsername(), findUser.getProfileImg());
+    }
+
     private void validateUsername(final String username) {
         if (username == null) {
             throw new NotInputException("아이디를 입력해 주세요.");
@@ -128,4 +136,5 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotExistUserException("등록된 회원이 없습니다."));
     }
+
 }

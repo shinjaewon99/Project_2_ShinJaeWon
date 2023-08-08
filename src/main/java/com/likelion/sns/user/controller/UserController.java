@@ -4,6 +4,7 @@ import com.likelion.sns.auth.dto.response.AuthenticationResponse;
 import com.likelion.sns.user.dto.request.UserJoinRequest;
 import com.likelion.sns.user.dto.request.logIn.UserLoginRequest;
 import com.likelion.sns.user.dto.response.UserCommonResponse;
+import com.likelion.sns.user.dto.response.UserReadResponse;
 import com.likelion.sns.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,11 @@ public class UserController {
     public ResponseEntity<UserCommonResponse> getUserDetails(@PathVariable final Long userId,
                                                              @RequestParam("image") final MultipartFile image) throws IOException {
         return ResponseEntity.ok(userService.postImg(userId, image));
+    }
+
+    @GetMapping("/{userId}/read")
+    public ResponseEntity<UserReadResponse> readUser(@PathVariable final Long userId) {
+
+        return ResponseEntity.ok(userService.readUser(userId));
     }
 }
