@@ -13,3 +13,6 @@ spring:
     show-sql: true
     database-platform: org.hibernate.community.dialect.SQLiteDialect
     defer-datasource-initialization: true
+
+jwt:
+  secretKey: 5A7134743777397A24432646294A404E733812556A586E3272357539782F4125
