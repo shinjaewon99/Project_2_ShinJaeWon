@@ -2,6 +2,7 @@ package com.likelion.sns.article.feed.controller;
 
 import com.likelion.sns.article.feed.dto.request.CreateFeedRequest;
 import com.likelion.sns.article.feed.dto.response.FeedCommonResponse;
+import com.likelion.sns.article.feed.dto.response.FeedReadListResponse;
 import com.likelion.sns.article.feed.dto.response.FeedReedOneResponse;
 import com.likelion.sns.article.feed.service.FeedService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,16 @@ public class FeedController {
         return ResponseEntity.ok(feedService.feedPostImg(userId, feedId, img));
     }
 
+    @GetMapping("/{feedId}/readLists")
+    public ResponseEntity<FeedReadListResponse> readListFeed(@PathVariable final Long userId,
+                                                             @PathVariable final Long feedId){
+
+        return ResponseEntity.ok(feedService.readListFeed(userId, feedId));
+    }
+
+
     @GetMapping("/{feedId}/readOne")
-    public ResponseEntity<FeedReedOneResponse> readOneFeed(@PathVariable Long userId,
+    public ResponseEntity<FeedReedOneResponse> readOneFeed(@PathVariable final Long userId,
                                                            @PathVariable final Long feedId) {
         return ResponseEntity.ok(feedService.reedSingleFeed(userId, feedId));
     }

@@ -8,6 +8,7 @@ import com.likelion.sns.article.feed.domain.Feed;
 import com.likelion.sns.article.feed.domain.FeedRepository;
 import com.likelion.sns.article.feed.dto.request.CreateFeedRequest;
 import com.likelion.sns.article.feed.dto.response.FeedCommonResponse;
+import com.likelion.sns.article.feed.dto.response.FeedReadListResponse;
 import com.likelion.sns.article.feed.dto.response.FeedReedOneResponse;
 import com.likelion.sns.article.likeArticle.domain.LikeArticle;
 import com.likelion.sns.global.exception.NotExistUserException;
@@ -96,14 +97,36 @@ public class FeedService {
         return response;
     }
 
+    // 피드 목록 조회 메소드
+    @Transactional(readOnly = true)
+    public FeedReadListResponse readListFeed(final Long userId, final Long feedId) {
+        validateExistUser(userId); // 등록된 회원인지 검증
+        Feed findFeed = validateExistFeed(feedId);// 등록된 피드인지 검증
 
+
+        String topImgUrl;
+
+        // 피드 이미지가 비어있지 않은 경우
+        if(!findFeed.getArticleImages().isEmpty()){
+            topImgUrl = findFeed.getArticleImages().get(0).getImageUrl();// 대표이미지 = 첫번째 등록 사진
+        }
+        // 피드 이미지가 비어있는 경우 지정된 기본이미지
+        else{
+            topImgUrl = "resources/static/5.PNG";
+        }
+
+        return new FeedReadListResponse(findFeed.getTitle(),findFeed.getContent(), topImgUrl);
+    }
+
+    // 피드 단독 조회 메소드
+    @Transactional(readOnly = true)
     public FeedReedOneResponse reedSingleFeed(final Long userId, final Long feedId) {
-        String imgUrl = " ";
-        List<String> commentList = new ArrayList<>();
-        Integer likeCount = 0;
+        String imgUrl = " "; // feed에 등록된 imgUrl을 담을 변수
+        List<String> commentList = new ArrayList<>(); // 댓글 목록을 담을 객체
+        Integer likeCount = 0; // 좋아요 갯수를 담을 변수
 
 
-        User findUser = validateExistUser(userId);
+        validateExistUser(userId);
         Feed findFeed = validateExistFeed(feedId);
 
         List<ArticleImage> articleImages = findFeed.getArticleImages();
@@ -159,4 +182,5 @@ public class FeedService {
             throw new NotInputException("내용을 입력해주세요.");
         }
     }
+
 }
