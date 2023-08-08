@@ -8,7 +8,7 @@ import lombok.Setter;
 public class ExceptionResponse {
     private String exceptionMessage;
 
-    public ExceptionResponse(String message) {
+    public ExceptionResponse(final String message) {
         this.exceptionMessage = message;
     }
 }
