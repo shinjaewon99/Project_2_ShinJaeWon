@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
@@ -30,7 +32,7 @@ public class UserController {
 
     @PostMapping(value = "/{userId}/postProfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UserCommonResponse> getUserDetails(@PathVariable final Long userId,
-                                                             @RequestParam("image") final MultipartFile image) {
+                                                             @RequestParam("image") final MultipartFile image) throws IOException {
         return ResponseEntity.ok(userService.postImg(userId, image));
     }
 }
