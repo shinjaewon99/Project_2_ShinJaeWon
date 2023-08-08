@@ -1,7 +1,7 @@
 package com.likelion.sns.article.feed.domain;
 
 import com.likelion.sns.article.articleImage.domain.ArticleImage;
-import com.likelion.sns.article.feed.dto.request.CreateFeedRequest;
+import com.likelion.sns.article.comment.domain.Comment;
 import com.likelion.sns.article.likeArticle.domain.LikeArticle;
 import com.likelion.sns.global.entity.BaseEntity;
 import com.likelion.sns.user.domain.User;
@@ -10,11 +10,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,26 +50,25 @@ public class Feed extends BaseEntity {
     @OneToMany(mappedBy = "likeFeedId")
     private List<LikeArticle> feedIdLikeArticles = new ArrayList<>();
 
-    public void setUser(User user) {
+    @OneToMany(mappedBy = "commentFeedId")
+    private List<Comment> comments = new ArrayList<>();
+
+    public void setUser(final User user) {
         this.userId = user;
         user.getFeeds().add(this);
     }
 
-    public void addArticleImage(ArticleImage articleImage) {
+    public void addArticleImage(final ArticleImage articleImage) {
         articleImages.add(articleImage);
         articleImage.setFeed(this);
     }
 
-    public void addLikeArticle(LikeArticle likeArticle) {
-        feedIdLikeArticles.add(likeArticle);
-        likeArticle.setFeed(this);
+    public Feed(final String title, final String content) {
+        this.title = title;
+        this.content = content;
     }
 
-    public static Feed dtoToEntity(CreateFeedRequest createRequest) {
-        Feed feed = new Feed();
-        feed.title = createRequest.getTitle();
-        feed.content = createRequest.getContent();
-
-        return feed;
+    public static ArticleImage createArticleImage(final String imageUrl) {
+        return new ArticleImage(imageUrl);
     }
 }
