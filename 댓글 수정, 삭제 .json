@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "551bca35-cde7-4bec-b697-ca25c44b9cc5",
+		"name": "project_2_mission_3day (댓글 수정 및 삭제)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22851675"
+	},
+	"item": [
+		{
+			"name": "정상 댓글 수정",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxMzgwMTU1LCJleHAiOjE2OTEzODE1OTV9.EkktWuVUyfZQYKuF5iPW2cGPXjbWddVPi-W6xIQC3TA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\" : \"왕십리 역 쪽인가요?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/comment/1/modify",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"comment",
+						"1",
+						"modify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "정상 댓글 논리 삭제",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGluIiwiaWF0IjoxNjkxNDU0MTgyLCJleHAiOjE2OTE0NTU2MjJ9.p1rAaJiIWPaXp5Hx6UkGvNKHN0AxHBYQrAe5f4BZ0Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1/feed/1/comment/1/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1",
+						"feed",
+						"1",
+						"comment",
+						"1",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
