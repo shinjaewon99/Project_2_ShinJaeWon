@@ -6,15 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserReadResponse {
-    private String username;
+    private String userId;
     private String profileImg;
-    private String email;
-    private String phone;
 
-    public UserReadResponse(String username, String profileImg, String email, String phone) {
-        this.username = username;
+    public UserReadResponse(String userId, String profileImg) {
+        this.userId = userId;
         this.profileImg= profileImg;
-        this.email = email;
-        this.phone = phone;
     }
 }
