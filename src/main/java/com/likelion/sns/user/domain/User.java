@@ -4,6 +4,7 @@ import com.likelion.sns.article.comment.domain.Comment;
 import com.likelion.sns.article.feed.domain.Feed;
 import com.likelion.sns.article.likeArticle.domain.LikeArticle;
 import com.likelion.sns.global.entity.BaseEntity;
+import com.likelion.sns.userAdditional.domain.userFollows.Follows;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -55,6 +56,9 @@ public class User extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL)
+    private List<Follows> follows = new ArrayList<>();
 
 
     public User(final String username, final String password, final String email,
