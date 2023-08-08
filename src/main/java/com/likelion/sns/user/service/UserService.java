@@ -2,7 +2,7 @@ package com.likelion.sns.user.service;
 
 import com.likelion.sns.auth.dto.response.AuthenticationResponse;
 import com.likelion.sns.auth.service.JwtProviderService;
-import com.likelion.sns.global.exception.NotExistUserNameException;
+import com.likelion.sns.global.exception.NotExistUserException;
 import com.likelion.sns.global.exception.NotInputException;
 import com.likelion.sns.user.domain.User;
 import com.likelion.sns.user.domain.UserRepository;
@@ -10,7 +10,6 @@ import com.likelion.sns.user.domain.UserRole;
 import com.likelion.sns.user.dto.request.UserJoinRequest;
 import com.likelion.sns.user.dto.request.logIn.UserLoginRequest;
 import com.likelion.sns.user.dto.response.UserCommonResponse;
-import com.likelion.sns.user.exception.NotExistUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -122,7 +121,7 @@ public class UserService {
 
     private void validateExistUsername(final String username) {
         userRepository.findByUsername(username)
-                .orElseThrow(() -> new NotExistUserNameException("등록된 회원이 아닙니다."));
+                .orElseThrow(() -> new NotExistUserException("등록된 회원이 아닙니다."));
     }
 
     private User validateExistUserId(final Long userId) {
