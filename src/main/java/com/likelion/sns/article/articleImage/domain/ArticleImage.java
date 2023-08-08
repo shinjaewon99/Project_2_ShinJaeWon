@@ -18,7 +18,16 @@ public class ArticleImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feed_id")
-    private Feed feedId;
+    private Feed imageFeedId;
 
+    @Column(name = "image_url")
     private String imageUrl;
+
+    public void setFeed(final Feed feed){
+        this.imageFeedId = feed;
+        feed.getArticleImages().add(this);
+    }
+    public ArticleImage(final String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
