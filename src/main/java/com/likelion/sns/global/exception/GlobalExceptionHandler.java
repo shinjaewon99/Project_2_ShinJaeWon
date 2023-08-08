@@ -3,6 +3,7 @@ package com.likelion.sns.global.exception;
 import com.likelion.sns.article.likeArticle.exception.NotMyFeedLikeException;
 import com.likelion.sns.global.dto.ExceptionResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,6 +24,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleFiledExceptionData(final MethodArgumentNotValidException e) {
         ExceptionResponse errorResponse = new ExceptionResponse("잘못된 데이터 타입 입니다.");
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleUserNotFoundException(final UsernameNotFoundException e) {
+        ExceptionResponse errorResponse = new ExceptionResponse("등록된 유저가 없습니다.");
         return ResponseEntity.badRequest().body(errorResponse);
     }
 }
