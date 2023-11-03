@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:sqlite:db.sqlite
-    driver-class-name: org.sqlite.JDBC
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
   servlet:
     multipart:
       max-request-size: 500MB # request 요청 제한
@@ -15,4 +15,4 @@ spring:
     defer-datasource-initialization: true
 
 jwt:
-  secretKey: 5A7134743777397A24432646294A404E733812556A586E3272357539782F4125
+  secretKey: ${JWT_SECRET_KEY}
