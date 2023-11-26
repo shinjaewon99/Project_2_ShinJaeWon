@@ -18,7 +18,7 @@ import java.io.IOException;
 public class FeedController {
     private final FeedService feedService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<FeedCommonResponse> createFeed(@PathVariable final Long userId,
                                                          @RequestBody final CreateFeedRequest createRequest) {
         return ResponseEntity.ok(feedService.createFeed(userId, createRequest));
@@ -39,13 +39,13 @@ public class FeedController {
     }
 
 
-    @GetMapping("/{feedId}")
+    @GetMapping("/{feedId}/readOne")
     public ResponseEntity<FeedReedOneResponse> readOneFeed(@PathVariable final Long userId,
                                                            @PathVariable final Long feedId) {
         return ResponseEntity.ok(feedService.reedSingleFeed(userId, feedId));
     }
 
-    @DeleteMapping("/{feedId}")
+    @DeleteMapping("/{feedId}/delete")
     public ResponseEntity<FeedCommonResponse> softDeleteFeed(@PathVariable final Long userId,
                                                              @PathVariable final Long feedId) {
         return ResponseEntity.ok(feedService.softDeleteFeed(userId, feedId));
