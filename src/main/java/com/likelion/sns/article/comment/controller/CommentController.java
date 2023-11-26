@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/write")
+    @PostMapping
     public ResponseEntity<CommentCommonResponse> writeComment(@PathVariable final Long userId,
                                                               @PathVariable final Long feedId,
                                                               @RequestBody final CommentWriteRequest writeRequest) {
@@ -22,7 +22,7 @@ public class CommentController {
         return ResponseEntity.ok().body(commentService.writeComment(userId, feedId, writeRequest));
     }
 
-    @PutMapping("{commentId}/modify")
+    @PutMapping("{commentId}")
     public ResponseEntity<CommentCommonResponse> modifyComment(@PathVariable final Long userId,
                                                                @PathVariable final Long feedId,
                                                                @PathVariable final Long commentId,
@@ -31,7 +31,7 @@ public class CommentController {
         return ResponseEntity.ok().body(commentService.modifyComment(userId, feedId, commentId, modifyRequest));
     }
 
-    @DeleteMapping("{commentId}/delete")
+    @DeleteMapping("{commentId}")
     public ResponseEntity<CommentCommonResponse> softDeleteComment(@PathVariable final Long userId,
                                                                    @PathVariable final Long feedId,
                                                                    @PathVariable final Long commentId) {
