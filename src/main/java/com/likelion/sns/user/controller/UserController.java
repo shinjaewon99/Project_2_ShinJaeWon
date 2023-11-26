@@ -37,7 +37,7 @@ public class UserController {
         return ResponseEntity.ok(userService.postImg(userId, image));
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId}/read")
     public ResponseEntity<UserReadResponse> readUser(@PathVariable final Long userId) {
 
         return ResponseEntity.ok(userService.readUser(userId));
