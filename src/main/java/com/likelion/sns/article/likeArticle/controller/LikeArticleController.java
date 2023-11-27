@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LikeArticleController {
     private final LikeArticleService likeArticleService;
 
-    @PostMapping("/push")
+    @PostMapping
     public ResponseEntity<LikeArticleCommonResponse> likePush(@PathVariable final Long userId,
                                                               @PathVariable final Long feedId) {
 
